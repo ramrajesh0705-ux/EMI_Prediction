@@ -37,10 +37,12 @@ def admin_login():
 # LOAD LOGS
 # ----------------------------------
 def load_logs():
-    if os.path.exists(LOG_FILE):
-        return pd.read_csv(LOG_FILE)
-    return pd.DataFrame()
-
+    df = pd.read_csv(
+    "data/prediction_logs.csv",
+    header=None,
+    names=["prediction", "max_emi", "timestamp"]
+    )
+    return df
 
 # ----------------------------------
 # OVERVIEW TAB
