@@ -121,9 +121,9 @@ if st.button("🔍 Analyze EMI Eligibility"):
 
     try:
         processed_data = preprocess_input(input_data)
-        reg_training_columns = joblib.load("D:\AI & ML\EMIPredictionApp\models\\reg_training_columns.pkl")
+        reg_training_columns = joblib.load("models/reg_training_columns.pkl")
         reg_processed_data  = processed_data[reg_training_columns]
-        clf_training_columns = joblib.load("D:\AI & ML\EMIPredictionApp\models\clf_training_columns.pkl") 
+        clf_training_columns = joblib.load("models/clf_training_columns.pkl") 
         clf_processed_data = processed_data[clf_training_columns]
     except ValueError as e:
         st.error(str(e))
@@ -131,11 +131,9 @@ if st.button("🔍 Analyze EMI Eligibility"):
 
     # --- Regression ---
     max_emi = reg_model.predict(reg_processed_data)[0]
-    max_emi  = np.expm1(max_emi) #applying log transform
+    max_emi  = np.expm1(max_emi) #applying inverse log transform
     
     
-    # --- Classification ---
-    #clf_processed_data.drop(['gender_MALE','marital_status_Single','employment_type_Government','monthly_rent','school_fees','college_fees','travel_expenses','groceries_utilities','other_monthly_expenses','existing_loans'],axis=1,inplace=True)
     class_pred = clf_model.predict(clf_processed_data)[0]
     class_probs = clf_model.predict_proba(clf_processed_data)[0]
 

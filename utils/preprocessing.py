@@ -102,14 +102,14 @@ def apply_power_transformers(input_df: pd.DataFrame) -> pd.DataFrame:
     
     for col in columns:
         print("processing power transformscls")
-        pt = joblib.load(f"D:\AI & ML\EMIPredictionApp\models\{col}_power_transformer.pkl")
+        pt = joblib.load(f"models/{col}_power_transformer.pkl")
         input_df[col] = pt.fit_transform(input_df[[col]])  # ONLY transform
     
     return input_df
 
 def apply_one_hot_encoding(input_df: pd.DataFrame) -> pd.DataFrame:
     one_hot_encoding_columns = ['gender', 'marital_status', 'employment_type']
-    encoder = joblib.load("D:\AI & ML\EMIPredictionApp\models\onehot_encoder.pkl")
+    encoder = joblib.load("models/onehot_encoder.pkl")
     # Transform (NOT fit_transform)
     encoded_array = encoder.transform(input_df[one_hot_encoding_columns])
 
@@ -130,7 +130,7 @@ def apply_one_hot_encoding(input_df: pd.DataFrame) -> pd.DataFrame:
     return final_df
 
 def apply_lebel_encoding(input_df: pd.DataFrame) -> pd.DataFrame:
-    label_encoder = joblib.load("D:\AI & ML\EMIPredictionApp\models\emiscenario_lblencoder.pkl")
+    label_encoder = joblib.load("models/emiscenario_lblencoder.pkl")
     # Transform (NOT fit_transform)
     df = input_df.copy()
     df['emi_scenario'] = label_encoder.transform(df['emi_scenario'])
@@ -147,10 +147,10 @@ def apply_binary_encoding(input_df):
 def apply_ordinal_encoders(input_df: pd.DataFrame) -> pd.DataFrame:
     
     # Load encoders
-    education_encoder = joblib.load("D:\AI & ML\EMIPredictionApp\models\education_encoder.pkl")
-    company_type_encoder = joblib.load("D:\AI & ML\EMIPredictionApp\models\company_type_encoder.pkl")
-    house_type_encoder = joblib.load("D:\AI & ML\EMIPredictionApp\models\house_type_encoder.pkl")
-    age_group_encoder = joblib.load("D:\AI & ML\EMIPredictionApp\models\\age_group_encoder.pkl")
+    education_encoder = joblib.load("models/education_encoder.pkl")
+    company_type_encoder = joblib.load("models/company_type_encoder.pkl")
+    house_type_encoder = joblib.load("models/house_type_encoder.pkl")
+    age_group_encoder = joblib.load("models/age_group_encoder.pkl")
 
     # Transform (NOT fit_transform)
     input_df['education'] = education_encoder.transform(input_df[['education']])
