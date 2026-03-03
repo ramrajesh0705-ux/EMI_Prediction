@@ -4,3 +4,4 @@ pandas>=1.4.0,<3.0.0
 plotly==6.5.0
 streamlit==1.50.0
 xgboost
+scikit-learn
