@@ -1,0 +1,8 @@
+artifact_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/756664613272139591
+creation_time: 1777390760658
+experiment_id: '756664613272139591'
+last_update_time: 1777390760658
+lifecycle_stage: active
+name: Max Monthly EMI Prediction Linear Regression experiment
+trace_location: null
+workspace: default

@@ -1,0 +1,14 @@
+artifact_uri: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/375354702314118049/8a9781908db545a489b086f27448c07c/artifacts
+end_time: 1777395511642
+entry_point_name: ''
+experiment_id: '375354702314118049'
+lifecycle_stage: active
+run_id: 8a9781908db545a489b086f27448c07c
+run_name: RF_High_Volume_Run
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777395490141
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,8 @@
+artifact_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/538474766621292130
+creation_time: 1777427406294
+experiment_id: '538474766621292130'
+last_update_time: 1777427406294
+lifecycle_stage: active
+name: Max Monthly EMI Prediction XGBoost Regressor experiment
+trace_location: null
+workspace: default

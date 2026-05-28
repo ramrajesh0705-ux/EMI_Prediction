@@ -1,0 +1,14 @@
+artifact_uri: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/541597532978980738/97597eebb54c44afb109575b2891de1e/artifacts
+end_time: 1777135901259
+entry_point_name: ''
+experiment_id: '541597532978980738'
+lifecycle_stage: active
+run_id: 97597eebb54c44afb109575b2891de1e
+run_name: flawless-ram-484
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777135888421
+status: 3
+tags: []
+user_id: root

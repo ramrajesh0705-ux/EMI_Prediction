@@ -1,0 +1,14 @@
+artifact_uri: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/756664613272139591/a88ccdf3718c495fbf420fd74c8c9a9d/artifacts
+end_time: 1777390785525
+entry_point_name: ''
+experiment_id: '756664613272139591'
+lifecycle_stage: active
+run_id: a88ccdf3718c495fbf420fd74c8c9a9d
+run_name: respected-fowl-583
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777390761027
+status: 3
+tags: []
+user_id: root

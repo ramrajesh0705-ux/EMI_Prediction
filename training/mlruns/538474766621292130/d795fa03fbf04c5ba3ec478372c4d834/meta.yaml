@@ -1,0 +1,14 @@
+artifact_uri: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/538474766621292130/d795fa03fbf04c5ba3ec478372c4d834/artifacts
+end_time: 1777427425337
+entry_point_name: ''
+experiment_id: '538474766621292130'
+lifecycle_stage: active
+run_id: d795fa03fbf04c5ba3ec478372c4d834
+run_name: xgboost_High_Volume_Run
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777427406622
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,8 @@
+artifact_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/169510386153435823
+creation_time: 1777054442326
+experiment_id: '169510386153435823'
+last_update_time: 1777054442326
+lifecycle_stage: active
+name: EMI Eligibility Prediction Logistic Regression version 2
+trace_location: null
+workspace: default

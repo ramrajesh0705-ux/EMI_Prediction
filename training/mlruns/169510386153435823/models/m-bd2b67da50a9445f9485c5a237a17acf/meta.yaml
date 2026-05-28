@@ -1,0 +1,10 @@
+artifact_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/169510386153435823/models/m-bd2b67da50a9445f9485c5a237a17acf/artifacts
+creation_timestamp: 1777054468252
+experiment_id: '169510386153435823'
+last_updated_timestamp: 1777054477496
+model_id: m-bd2b67da50a9445f9485c5a237a17acf
+model_type: null
+name: logistic_reg_model
+source_run_id: 3b446ad716904deaa30fd1fde0902ece
+status: 2
+status_message: null

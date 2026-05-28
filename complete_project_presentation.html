@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Prediction App - Complete Project Presentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+        .slide {
+            padding: 40px;
+            min-height: 100vh;
+            border-bottom: 1px solid #eee;
+        }
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        .title-slide h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .title-slide h2 {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .title-slide .meta {
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 2em;
+            border-left: 6px solid #3498db;
+            padding-left: 20px;
+            margin-top: 50px;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-top: 30px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        .bullet-list {
+            margin-left: 20px;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #e8f4fd;
+            transition: background-color 0.3s ease;
+        }
+        .metric-value {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+        .best-model {
+            background-color: #d4edda !important;
+            font-weight: bold;
+        }
+        .comparison-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .tech-category {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .tech-category h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .tech-category ul {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+        }
+        .tech-category li {
+            margin-bottom: 5px;
+        }
+        .impact-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .metric-card .value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .metric-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .roadmap {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .roadmap h4 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .conclusion {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .conclusion h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+            }
+            .slide {
+                padding: 20px;
+            }
+            .title-slide h1 {
+                font-size: 2em;
+            }
+            table {
+                font-size: 0.8em;
+            }
+            th, td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Slide -->
+        <div class="slide title-slide">
+            <h1>EMI Prediction App</h1>
+            <h2>AI-Powered FinTech Solution for Loan Risk Assessment</h2>
+            <div class="meta">
+                <p><strong>Project:</strong> FinTech ML Suite</p>
+            </div>
+        </div>
+	
+	 <!-- Problem Statement -->
+        <div class="slide">
+            <h2>Problem Statement</h2>
+            <div class="highlight">
+                <h3>Challenges in Traditional Loan Assessment:</h3>
+                <p>Financial institutions face significant challenges with manual loan approval processes:</p>
+                <ul class="bullet-list">
+                    <li>Time-consuming and labor-intensive evaluation procedures</li>
+                    <li>Prone to human error and subjective bias in decision making</li>
+                    <li>Inconsistent risk assessment criteria across different evaluators</li>
+                    <li>Limited predictive capabilities for future loan performance</li>
+                    <li>Customers face uncertainty about their maximum affordable EMI amounts</li>
+                    <li>Lack of data-driven insights for personalized lending decisions</li>
+                </ul>
+            </div>
+
+            <h3>Business Impact:</h3>
+            <p>Manual processes result in delayed approvals, increased operational costs, and higher default rates due to inadequate risk assessment.</p>
+        </div>
+
+
+
+        <!-- Project Overview -->
+        <div class="slide">
+            <h2>Project Overview</h2>
+            <p>The EMI Prediction App is a comprehensive AI-powered platform designed to revolutionize loan risk assessment in the financial sector. This end-to-end machine learning solution combines advanced predictive analytics with an intuitive web interface to provide accurate loan eligibility predictions and maximum EMI calculations.</p>
+
+            <div class="highlight">
+                <h3>Key Features:</h3>
+                <ul class="bullet-list">
+                    <li>Dual ML approach with classification and regression models</li>
+                    <li>Streamlit-based web application with multi-page interface</li>
+                    <li>MLflow integration for experiment tracking and model versioning</li>
+                    <li>Production-ready deployment with monitoring capabilities</li>
+                    <li>Comprehensive borrower profiling with 27+ features</li>
+                </ul>
+            </div>
+        </div>
+
+               <!-- Solution Architecture -->
+        <div class="slide">
+            <h2>Solution Architecture</h2>
+            <div class="highlight">
+                <h3>End-to-End ML Pipeline:</h3>
+
+                <h4>1. Data Collection & Preprocessing</h4>
+                <h4>2. Exploratory Data Analysis</h4>
+
+                <h4>3. Model Development</h4>
+                <ul class="bullet-list">
+                    <li>Classification models for loan eligibility prediction (3 classes: Eligible, High Risk, Not Eligible)</li>
+                    <li>Regression models for maximum EMI amount prediction</li>
+          
+                </ul>
+
+                <h4>4. Deployment & Monitoring</h4>
+                <ul class="bullet-list">
+                    <li>Streamlit web application with responsive UI</li>
+                    <li>Real-time predictions with confidence scoring</li>
+                    <li>Model performance monitoring and logging</li>
+                    <li>Admin panel for system management</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Data Analysis -->
+        <div class="slide">
+            <h2>Data Analysis & EDA</h2>
+            <div class="highlight">
+                <h3>Top Drivers of Eligibility (Positive Factors)</h3>
+                <ul class="bullet-list">
+                    <li>max_monthly_emi (Strong Correlation: 0.59): The most powerful indicator. A higher calculated EMI capacity almost guarantees approval, underscoring the focus on affordability.</li>
+                    <li>Professional and Post Graduate Education: These groups have significantly higher approval rates (27.0% and 22.4%, respectively) compared to High School graduates (11.1%), showing education is a proxy for financial stability.</li>
+                    <li>Own/Family House Type: Applicants who own a house or live with family have ~24.3% approval, while renters have only 9.5% approval, highlighting housing stability as a crucial positive factor.</li>
+                </ul>
+
+                <h3>Key Risk Factors (Negative Impact):</h3>
+                <ul class="bullet-list">
+                    <li>requested_amount (Moderate Correlation: -0.31): High loan requests are a major risk. As the requested amount grows, the likelihood of eligibility decreases substantially.</li>
+                    <li>High Monthly Expenses: Larger college_fees, school_fees, and monthly_rent reduce disposable income and are associated with lower eligibility.</li>
+                    <li>Strict Lending Environment: Overall, 77.3% of all applicants across all loan types are Not_Eligible, indicating a conservative approval process, particularly for Personal and Vehicle loans.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Feature Engineering -->
+        <div class="slide">
+            <h2>EDA ...</h2>
+            <div class="highlight">
+                <h3>Demographic & Financial Profiles: Where the Insights Lie</h3>
+
+                <h4>Factors with Negligible Impact:</h4>
+                <ul class="bullet-list">
+                    <li>Gender: Approval rates are nearly identical (F: ~18.40%, M: ~18.39%).</li>
+                    <li>Age: Among active age groups (25-64), approval rates are consistent (~18.2% - 18.5%).</li>
+                    <li>Company Type: The specific type of employer (Large Indian, MNC, etc.) has almost no influence on eligibility.</li>
+
+                </ul>
+
+                <h4>Weak Positive Indicators (Collectively Important):</h4>
+                <ul class="bullet-list">
+                    <li>Income & Savings: monthly_salary (0.23), bank_balance (0.26), and emergency_fund (0.24) are all positively correlated with eligibility.</li>
+                    <li>Spending & Credit: Indicators like groceries_utilities (0.29) and credit_score (0.17) also show a positive, albeit weak, association.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Model Development -->
+        <div class="slide">
+            <h2>Model Development</h2>
+            <div class="highlight">
+                <h3>Algorithm Selection & Training Strategy:</h3>
+
+                <h4>Classification Models Evaluated:</h4>
+                <ul class="bullet-list">
+                    <li>Logistic Regression (multiple versions with different preprocessing)</li>
+                    <li>Random Forest Classifier with ensemble learning</li>
+                    <li>XGBoost Classifier with gradient boosting</li>
+                </ul>
+
+                <h4>Regression Models Evaluated:</h4>
+                <ul class="bullet-list">
+                    <li>Linear Regression as baseline model</li>
+                    <li>Random Forest Regressor for non-linear relationships</li>
+                    <li>XGBoost Regressor for complex pattern recognition</li>
+                </ul>
+
+                <h4>Training Process:</h4>
+                <ul class="bullet-list">
+                    <li>Cross-validation for robust performance estimation</li>
+                    <li>Hyperparameter optimization using grid/random search</li>
+                    <li>MLflow experiment tracking for reproducibility</li>
+                    <li>Model validation on holdout test sets</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Model Performance -->
+        <div class="slide">
+            <h2>Model Performance Comparison</h2>
+	    <a href="http://127.0.0.1:5000/">View Mlflow Tracking</a>
+            <h3>Classification Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th>F1 Score</th>
+                        <th>Precision</th>
+                        <th>Recall</th>
+                        <th>ROC AUC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Logistic Regression v2</td>
+                        <td class="metric-value">0.765</td>
+                        <td class="metric-value">0.612</td>
+                        <td class="metric-value">0.628</td>
+                        <td class="metric-value">0.728</td>
+                        <td class="metric-value">0.916</td>
+                    </tr>
+                    <tr>
+                        <td>Logistic Regression v1</td>
+                        <td class="metric-value">0.897</td>
+                        <td class="metric-value">0.583</td>
+                        <td class="metric-value">0.570</td>
+                        <td class="metric-value">0.596</td>
+                        <td class="metric-value">0.934</td>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td class="metric-value">0.809</td>
+                        <td class="metric-value">0.648</td>
+                        <td class="metric-value">0.643</td>
+                        <td class="metric-value">0.756</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr class="best-model">
+                        <td>XGBoost</td>
+                        <td class="metric-value">0.894</td>
+                        <td class="metric-value">0.731</td>
+                        <td class="metric-value">0.721</td>
+                        <td class="metric-value">0.797</td>
+                        <td>N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="comparison-note">
+                XGBoost selected for best F1 score (0.731) - optimal balance of precision and recall
+            </div>
+
+            <h3>Regression Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>R² Score</th>
+                        <th>MAE</th>
+                        <th>MAPE</th>
+                        <th>MSE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="best-model">
+                        <td>Random Forest</td>
+                        <td class="metric-value">0.961</td>
+                        <td class="metric-value">0.165</td>
+                        <td class="metric-value">0.021</td>
+                        <td class="metric-value">0.073</td>
+                    </tr>
+                    <tr>
+                        <td>XGBoost</td>
+                        <td class="metric-value">0.944</td>
+                        <td class="metric-value">0.228</td>
+                        <td class="metric-value">0.031</td>
+                        <td class="metric-value">0.104</td>
+                    </tr>
+                    <tr>
+                        <td>Linear Regression</td>
+                        <td class="metric-value">0.759</td>
+                        <td class="metric-value">0.509</td>
+                        <td class="metric-value">0.068</td>
+                        <td class="metric-value">0.448</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="comparison-note">
+                Random Forest selected (R²: 0.961) - explains 96.1% of variance in EMI amounts
+            </div>
+        </div>
+
+        <!-- Application Features -->
+        <div class="slide">
+            <h2>Application Features</h2>
+            <div class="highlight">
+                <h3>Streamlit Web Application Architecture:</h3>
+
+                <h4>User Interface Pages:</h4>
+                <ul class="bullet-list">
+                    <li>Home: Feature overview and navigation hub</li>
+                    <li>EMI Prediction: Main prediction interface with comprehensive input forms</li>
+                    <li>Data Explorer: Prediction logs visualization and analytics dashboard</li>
+                    <li>Model Monitoring: Performance tracking and metrics visualization</li>
+                    <li>Admin Panel: System management, configuration, and user access control</li>
+                </ul>
+
+                <h4>Input Features Captured:</h4>
+               	<a href="https://guviemiprediction.streamlit.app">https://guviemiprediction.streamlit.app</a>
+                </ul>
+            </div>
+        </div>
+
+        
+
+        <!-- Results & Impact -->
+        <div class="slide">
+            <h2>Results & Business Impact</h2>
+
+            <div class="impact-metrics">
+                <div class="metric-card">
+                    <div class="value">89.7%</div>
+                    <div class="label">Classification Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">96.1%</div>
+                    <div class="label">Regression R² Score</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">80%</div>
+                    <div class="label">Reduction in Manual Effort</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">2.13%</div>
+                    <div class="label">Mean Absolute Percentage Error</div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h3>Business Value Delivered:</h3>
+                <ul class="bullet-list">
+                    <li>80% reduction in manual loan assessment effort through automation</li>
+                    <li>Consistent, unbiased decision-making processes</li>
+                    <li>Accelerated loan approval timelines (minutes instead of hours)</li>
+                    <li>Enhanced customer experience with transparent EMI calculations</li>
+                    <li>Reduced default rates through improved risk assessment accuracy</li>
+                    <li>Scalable solution supporting high-volume loan processing</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Conclusion -->
+        <div class="slide">
+            <div class="conclusion">
+                <h2>Conclusion</h2>
+
+                <h3>Project Achievements:</h3>
+                <ul style="text-align: left; display: inline-block; margin-bottom: 20px;">
+                    <li>Successfully developed a comprehensive end-to-end ML solution for EMI prediction</li>
+                    <li>Achieved industry-leading model performance with rigorous evaluation</li>
+                    <li>Deployed a production-ready web application with enterprise features</li>
+                    <li>Implemented robust MLOps practices ensuring system reliability</li>
+                    <li>Demonstrated significant business value through automation and accuracy</li>
+                </ul>
+
+                <h3>Key Takeaways:</h3>
+                <ul style="text-align: left; display: inline-block; margin-bottom: 20px;">
+                    <li>AI/ML technologies can dramatically improve financial decision-making processes</li>
+                    <li>Ensemble methods consistently outperform traditional approaches in complex domains</li>
+                    <li>Proper feature engineering is crucial for achieving high model performance</li>
+                    <li>MLOps practices are essential for building reliable and maintainable ML systems</li>
+                    <li>Domain expertise combined with technical excellence drives successful AI implementations</li>
+                </ul>
+
+                <p style="font-size: 1.2em; font-weight: bold; margin-top: 20px;">
+                    The EMI Prediction App demonstrates the transformative potential of AI in FinTech, paving the way for more intelligent and efficient financial services.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

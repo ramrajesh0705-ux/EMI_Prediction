@@ -1,0 +1,8 @@
+artifact_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/558652458048498216
+creation_time: 1777390167873
+experiment_id: '558652458048498216'
+last_update_time: 1777390167873
+lifecycle_stage: active
+name: EMI Eligibility Prediction XG Boost Classification experiment
+trace_location: null
+workspace: default

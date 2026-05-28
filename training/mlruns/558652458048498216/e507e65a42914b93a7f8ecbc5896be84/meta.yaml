@@ -1,0 +1,14 @@
+artifact_uri: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/558652458048498216/e507e65a42914b93a7f8ecbc5896be84/artifacts
+end_time: 1777390253042
+entry_point_name: ''
+experiment_id: '558652458048498216'
+lifecycle_stage: active
+run_id: e507e65a42914b93a7f8ecbc5896be84
+run_name: monumental-flea-537
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777390239396
+status: 3
+tags: []
+user_id: root

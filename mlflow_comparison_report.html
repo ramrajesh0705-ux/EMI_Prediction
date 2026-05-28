@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLflow Runs Comparison - EMI Prediction App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e8f4fd;
+        }
+        .summary {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .highlight {
+            background-color: #d4edda;
+            font-weight: bold;
+        }
+        .metric-value {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MLflow Runs Comparison Report</h1>
+
+        <h2>Classification Experiments (EMI Eligibility Prediction)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Experiment Name</th>
+                    <th>Model Type</th>
+                    <th>Accuracy</th>
+                    <th>F1 Score</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>ROC AUC Macro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EMI Eligibility Prediction Logistic Regression version 2</td>
+                    <td>Logistic Regression v2</td>
+                    <td class="metric-value">0.7647</td>
+                    <td class="metric-value">0.6124</td>
+                    <td class="metric-value">0.6284</td>
+                    <td class="metric-value">0.7283</td>
+                    <td class="metric-value">0.9160</td>
+                </tr>
+                <tr>
+                    <td>EMI Eligibility Prediction Logistic Regression Experiment version 1</td>
+                    <td>Logistic Regression v1</td>
+                    <td class="metric-value highlight">0.8973</td>
+                    <td class="metric-value">0.5825</td>
+                    <td class="metric-value">0.5697</td>
+                    <td class="metric-value">0.5959</td>
+                    <td class="metric-value highlight">0.9339</td>
+                </tr>
+                <tr>
+                    <td>EMI Eligibility Prediction Random Forrest Classification experiment</td>
+                    <td>Random Forest Classifier</td>
+                    <td class="metric-value">0.8088</td>
+                    <td class="metric-value">0.6475</td>
+                    <td class="metric-value">0.6433</td>
+                    <td class="metric-value">0.7560</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>EMI Eligibility Prediction XG Boost Classification experiment</td>
+                    <td>XGBoost Classifier</td>
+                    <td class="metric-value">0.8943</td>
+                    <td class="metric-value highlight">0.7310</td>
+                    <td class="metric-value highlight">0.7209</td>
+                    <td class="metric-value highlight">0.7966</td>
+                    <td>N/A</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="summary">
+            <h3>Classification Summary</h3>
+            <ul>
+                <li><strong>Best Accuracy:</strong> Logistic Regression v1 (0.8973)</li>
+                <li><strong>Best F1 Score:</strong> XGBoost Classifier (0.7310)</li>
+                <li><strong>Best ROC AUC:</strong> Logistic Regression v1 (0.9339)</li>
+                <li>Logistic Regression models show strong ROC AUC performance, indicating good probability calibration</li>
+                <li>XGBoost provides the best balance of precision and recall</li>
+            </ul>
+        </div>
+
+        <h2>Regression Experiments (Max Monthly EMI Prediction)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Experiment Name</th>
+                    <th>Model Type</th>
+                    <th>R² Score</th>
+                    <th>MAE</th>
+                    <th>MAPE</th>
+                    <th>MSE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Max Monthly EMI Prediction Random Forest Regressor experiment</td>
+                    <td>Random Forest Regressor</td>
+                    <td class="metric-value highlight">0.9608</td>
+                    <td class="metric-value highlight">0.1653</td>
+                    <td class="metric-value highlight">0.0213</td>
+                    <td class="metric-value highlight">0.0727</td>
+                </tr>
+                <tr>
+                    <td>Max Monthly EMI Prediction XGBoost Regressor experiment</td>
+                    <td>XGBoost Regressor</td>
+                    <td class="metric-value">0.9438</td>
+                    <td class="metric-value">0.2282</td>
+                    <td class="metric-value">0.0312</td>
+                    <td class="metric-value">0.1043</td>
+                </tr>
+                <tr>
+                    <td>Max Monthly EMI Prediction Linear Regression experiment</td>
+                    <td>Linear Regression</td>
+                    <td class="metric-value">0.7587</td>
+                    <td class="metric-value">0.5089</td>
+                    <td class="metric-value">0.0683</td>
+                    <td class="metric-value">0.4478</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="summary">
+            <h3>Regression Summary</h3>
+            <ul>
+                <li><strong>Best R² Score:</strong> Random Forest Regressor (0.9608) - explains 96.08% of variance</li>
+                <li><strong>Best MAE:</strong> Random Forest Regressor (0.1653) - lowest absolute error</li>
+                <li><strong>Best MAPE:</strong> Random Forest Regressor (0.0213) - 2.13% mean absolute percentage error</li>
+                <li>Random Forest significantly outperforms other models in all regression metrics</li>
+                <li>Linear Regression shows the poorest performance, indicating non-linear relationships in the data</li>
+            </ul>
+        </div>
+
+        <h2>Key Insights from All Runs</h2>
+        <div class="summary">
+            <ol>
+                <li><strong>Model Selection Recommendations:</strong>
+                    <ul>
+                        <li><strong>Classification:</strong> XGBoost Classifier for balanced performance (best F1 score)</li>
+                        <li><strong>Regression:</strong> Random Forest Regressor for highest accuracy and lowest error</li>
+                    </ul>
+                </li>
+                <li><strong>Performance Trends:</strong>
+                    <ul>
+                        <li>Tree-based models (Random Forest, XGBoost) consistently outperform linear models</li>
+                        <li>Ensemble methods provide better generalization for both tasks</li>
+                        <li>Logistic Regression shows good probability calibration (high ROC AUC) despite lower accuracy</li>
+                    </ul>
+                </li>
+                <li><strong>Experiment Distribution:</strong>
+                    <ul>
+                        <li>4 classification experiments focused on EMI eligibility prediction</li>
+                        <li>3 regression experiments focused on maximum EMI amount prediction</li>
+                        <li>All experiments used proper MLflow tracking with comprehensive metrics logging</li>
+                    </ul>
+                </li>
+                <li><strong>Database vs File System:</strong>
+                    <ul>
+                        <li>The <code>mlflow.db</code> contains minimal experiment metadata (only 2 experiments logged)</li>
+                        <li>Full run details are stored in the file system under <code>mlruns/</code> directories</li>
+                        <li>File-based storage provides more detailed metrics and parameters than the database</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <p style="text-align: center; margin-top: 40px; color: #7f8c8d;">
+            This comparison demonstrates a thorough model development process with multiple algorithms tested for both classification and regression tasks in the EMI prediction domain.
+        </p>
+    </div>
+</body>
+</html>

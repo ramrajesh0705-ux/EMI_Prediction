@@ -1,0 +1,14 @@
+artifact_uri: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/558652458048498216/934e2c7a5b1c4eb38e9e3c41752b12a1/artifacts
+end_time: 1777390168869
+entry_point_name: ''
+experiment_id: '558652458048498216'
+lifecycle_stage: active
+run_id: 934e2c7a5b1c4eb38e9e3c41752b12a1
+run_name: luminous-gnat-731
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1777390168251
+status: 4
+tags: []
+user_id: root

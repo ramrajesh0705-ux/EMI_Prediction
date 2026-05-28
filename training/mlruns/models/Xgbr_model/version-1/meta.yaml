@@ -1,0 +1,16 @@
+creation_timestamp: 1777428707595
+current_stage: None
+deployment_job_state: null
+description: ''
+last_updated_timestamp: 1777428707595
+model_id: m-972e4e4f5b054c66bf38834bfabb2135
+name: Xgbr_model
+run_id: d795fa03fbf04c5ba3ec478372c4d834
+run_link: ''
+source: models:/m-972e4e4f5b054c66bf38834bfabb2135
+status: READY
+status_message: null
+storage_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/538474766621292130/models/m-972e4e4f5b054c66bf38834bfabb2135/artifacts
+user_id: null
+version: 1
+workspace: default

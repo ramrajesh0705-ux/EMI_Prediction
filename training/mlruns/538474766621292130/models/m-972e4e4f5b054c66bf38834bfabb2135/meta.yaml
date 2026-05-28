@@ -1,0 +1,10 @@
+artifact_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/538474766621292130/models/m-972e4e4f5b054c66bf38834bfabb2135/artifacts
+creation_timestamp: 1777427408900
+experiment_id: '538474766621292130'
+last_updated_timestamp: 1777427425008
+model_id: m-972e4e4f5b054c66bf38834bfabb2135
+model_type: null
+name: xgbr_model
+source_run_id: d795fa03fbf04c5ba3ec478372c4d834
+status: 2
+status_message: null

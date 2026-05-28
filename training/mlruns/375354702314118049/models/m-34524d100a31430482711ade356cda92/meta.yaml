@@ -1,0 +1,10 @@
+artifact_location: /content/drive/MyDrive/EMIPredictionApp/training/mlruns/375354702314118049/models/m-34524d100a31430482711ade356cda92/artifacts
+creation_timestamp: 1777395492201
+experiment_id: '375354702314118049'
+last_updated_timestamp: 1777395511331
+model_id: m-34524d100a31430482711ade356cda92
+model_type: null
+name: rf_model
+source_run_id: 8a9781908db545a489b086f27448c07c
+status: 2
+status_message: null
