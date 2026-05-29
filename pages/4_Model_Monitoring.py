@@ -4,8 +4,8 @@ from datetime import timedelta
 import pandas as pd
 import streamlit as st
 
-from config.settings import PREDICTION_LOG_PATH
-
+#from config.settings import PREDICTION_LOG_PATH
+PREDICTION_LOG_PATH = "data/prediction_logs.csv"
 st.title("📡 Model Monitoring Dashboard")
 st.markdown(
     "This dashboard shows prediction log volume, outcome distribution, and recent model behavior over time."
