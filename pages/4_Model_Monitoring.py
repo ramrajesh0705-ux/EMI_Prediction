@@ -12,7 +12,6 @@ st.markdown(
 )
 
 
-@st.cache_data
 def load_prediction_logs(log_path: str) -> pd.DataFrame:
     df = pd.read_csv(
         "data/prediction_logs.csv",
