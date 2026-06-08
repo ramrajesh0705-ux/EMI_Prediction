@@ -14,11 +14,8 @@ st.markdown(
 
 @st.cache_data
 def load_prediction_logs(log_path: str) -> pd.DataFrame:
-    if not os.path.exists(log_path):
-        return pd.DataFrame(columns=["prediction", "max_emi", "timestamp"])
-
     df = pd.read_csv(
-        log_path,
+        "data/prediction_logs.csv",
         header=None,
         names=["prediction", "max_emi", "timestamp"],
         parse_dates=[2],
