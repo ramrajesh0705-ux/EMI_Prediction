@@ -23,105 +23,131 @@ col2.metric("Columns", df.shape[1])
 st.markdown("**Preview of the first 10 records**")
 st.dataframe(df.head(10))
 
-missing_values = df.isnull().sum()
-missing_values = missing_values[missing_values > 0].sort_values(ascending=False)
-if not missing_values.empty:
-    st.subheader("Missing values")
-    st.dataframe(missing_values.to_frame("missing_count"))
-else:
-    st.subheader("Missing values")
-    st.success("No missing values detected in the cleaned dataset.")
+# 1. EMI Eligibility by Gender
+gender_eligibility_counts = df.groupby(['gender', 'emi_eligibility']).size().unstack(fill_value=0)
+gender_eligibility_counts['Total_Applicants'] = gender_eligibility_counts.sum(axis=1)
+gender_eligibility_counts['Approval_Percentage'] = (gender_eligibility_counts['Eligible'] / gender_eligibility_counts['Total_Applicants']) * 100
+print("EMI Eligibility by Gender:")
+print(gender_eligibility_counts)
+print("\n")
 
-st.subheader("Numeric feature summary")
-st.dataframe(df.select_dtypes(include=["number"]).describe().T)
+gender_eligibility_counts[['Eligible', 'High_Risk', 'Not_Eligible']].plot(kind='bar', stacked=True, figsize=(10, 6), color=['green', 'orange', 'red'])
+plt.title('EMI Eligibility Distribution by Gender')
+plt.xlabel('Gender')
+plt.ylabel('Number of Applicants')
+plt.xticks(rotation=0)
+plt.legend(title='EMI Eligibility')
+plt.tight_layout()
+plt.show()
 
-st.header("Target and categorical distributions")
+# 2. EMI Eligibility by Marital Status
+marital_status_eligibility_counts = df.groupby(['marital_status', 'emi_eligibility']).size().unstack(fill_value=0)
+marital_status_eligibility_counts['Total_Applicants'] = marital_status_eligibility_counts.sum(axis=1)
+marital_status_eligibility_counts['Approval_Percentage'] = (marital_status_eligibility_counts['Eligible'] / marital_status_eligibility_counts['Total_Applicants']) * 100
+print("\nEMI Eligibility by Marital Status:")
+print(marital_status_eligibility_counts)
+print("\n")
 
-eligibility_counts = df["emi_eligibility"].value_counts().reset_index()
-eligibility_counts.columns = ["emi_eligibility", "count"]
-fig_eligibility = px.bar(
-    eligibility_counts,
-    x="emi_eligibility",
-    y="count",
-    color="emi_eligibility",
-    title="EMI Eligibility Distribution",
-    text="count",
-)
-fig_eligibility.update_layout(showlegend=False)
-st.plotly_chart(fig_eligibility, use_container_width=True)
+marital_status_eligibility_counts[['Eligible', 'High_Risk', 'Not_Eligible']].plot(kind='bar', stacked=True, figsize=(10, 6), color=['green', 'orange', 'red'])
+plt.title('EMI Eligibility Distribution by Marital Status')
+plt.xlabel('Marital Status')
+plt.ylabel('Number of Applicants')
+plt.xticks(rotation=0)
+plt.legend(title='EMI Eligibility')
+plt.tight_layout()
+plt.show()
 
-category_fields = ["gender", "marital_status", "education", "house_type", "age_group"]
-for field in category_fields:
-    if field in df.columns:
-        counts = df[field].value_counts().reset_index()
-        counts.columns = [field, "count"]
-        fig = px.bar(
-            counts,
-            x=field,
-            y="count",
-            color=field,
-            title=f"Distribution of {field.replace('_', ' ').title()}",
-            text="count",
-        )
-        fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+# 3. EMI Eligibility by Education Level
+education_eligibility_counts = df.groupby(['education', 'emi_eligibility']).size().unstack(fill_value=0)
+education_eligibility_counts['Total_Applicants'] = education_eligibility_counts.sum(axis=1)
+education_eligibility_counts['Approval_Percentage'] = (education_eligibility_counts['Eligible'] / education_eligibility_counts['Total_Applicants']) * 100
+print("\nEMI Eligibility by Education Level:")
+print(education_eligibility_counts)
+print("\n")
 
-st.header("Scenario and approval analysis")
-scenario_counts = (
-    df.groupby(["emi_scenario", "emi_eligibility"]).size().reset_index(name="count")
-)
-fig_scenario = px.bar(
-    scenario_counts,
-    x="emi_scenario",
-    y="count",
-    color="emi_eligibility",
-    title="EMI Scenario vs Eligibility",
-    barmode="stack",
-    category_orders={"emi_eligibility": ["Eligible", "High_Risk", "Not_Eligible"]},
-)
-fig_scenario.update_xaxes(tickangle=-45)
-st.plotly_chart(fig_scenario, use_container_width=True)
+education_eligibility_counts[['Eligible', 'High_Risk', 'Not_Eligible']].plot(kind='bar', stacked=True, figsize=(10, 6), color=['green', 'orange', 'red'])
+plt.title('EMI Eligibility Distribution by Education Level')
+plt.xlabel('Education Level')
+plt.ylabel('Number of Applicants')
+plt.xticks(rotation=45)
+plt.legend(title='EMI Eligibility')
+plt.tight_layout()
+plt.show()
 
-approval_rate = (
-    df.assign(
-        approved=df["emi_eligibility"].map({"Eligible": 1, "High_Risk": 0, "Not_Eligible": 0})
-    )
-    .groupby("emi_scenario", as_index=False)["approved"]
-    .mean()
-)
-fig_approval = px.line(
-    approval_rate,
-    x="emi_scenario",
-    y="approved",
-    markers=True,
-    title="EMI Approval Rate by Scenario",
-)
-fig_approval.update_layout(yaxis=dict(tickformat=".0%", range=[0, 1]))
-fig_approval.update_xaxes(tickangle=-45)
-st.plotly_chart(fig_approval, use_container_width=True)
+# 4. EMI Eligibility by Age Group
+bins = [0, 25, 35, 45, 55, 65, np.inf]
+labels = ['<25', '25-34', '35-44', '45-54', '55-64', '65+']
+df['age_group'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
 
-eligible_df = df[df["emi_eligibility"] == "Eligible"]
-if not eligible_df.empty:
-    fig_box = px.box(
-        eligible_df,
-        x="emi_scenario",
-        y="max_monthly_emi",
-        title="Max Monthly EMI for Eligible Applicants by Scenario",
-    )
-    fig_box.update_xaxes(tickangle=-45)
-    st.plotly_chart(fig_box, use_container_width=True)
+age_group_eligibility_counts = df.groupby(['age_group', 'emi_eligibility']).size().unstack(fill_value=0)
+age_group_eligibility_counts['Total_Applicants'] = age_group_eligibility_counts.sum(axis=1)
+age_group_eligibility_counts['Approval_Percentage'] = (age_group_eligibility_counts['Eligible'] / age_group_eligibility_counts['Total_Applicants']) * 100
+print("\nEMI Eligibility by Age Group:")
+print(age_group_eligibility_counts)
+print("\n")
 
-st.header("Numeric correlation")
-numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
-if len(numeric_cols) > 1:
-    corr = df[numeric_cols].corr()
-    fig_corr = px.imshow(
-        corr,
-        text_auto=True,
-        aspect="auto",
-        title="Correlation Matrix for Numeric Features",
-        color_continuous_scale="RdBu",
-        zmin=-1,
-        zmax=1,
-    )
-    st.plotly_chart(fig_corr, use_container_width=True)
+age_group_eligibility_counts[['Eligible', 'High_Risk', 'Not_Eligible']].plot(kind='bar', stacked=True, figsize=(12, 7), color=['green', 'orange', 'red'])
+plt.title('EMI Eligibility Distribution by Age Group')
+plt.xlabel('Age Group')
+plt.ylabel('Number of Applicants')
+plt.xticks(rotation=45)
+plt.legend(title='EMI Eligibility')
+plt.tight_layout()
+plt.show()
+
+# 5. EMI Eligibility by House Type
+house_type_eligibility_counts = df.groupby(['house_type', 'emi_eligibility']).size().unstack(fill_value=0)
+house_type_eligibility_counts['Total_Applicants'] = house_type_eligibility_counts.sum(axis=1)
+house_type_eligibility_counts['Approval_Percentage'] = (house_type_eligibility_counts['Eligible'] / house_type_eligibility_counts['Total_Applicants']) * 100
+print("\nEMI Eligibility by House Type:")
+print(house_type_eligibility_counts)
+print("\n")
+
+house_type_eligibility_counts[['Eligible', 'High_Risk', 'Not_Eligible']].plot(kind='bar', stacked=True, figsize=(10, 6), color=['green', 'orange', 'red'])
+plt.title('EMI Eligibility Distribution by House Type')
+plt.xlabel('House Type')
+plt.ylabel('Number of Applicants')
+plt.xticks(rotation=0)
+plt.legend(title='EMI Eligibility')
+plt.tight_layout()
+plt.show()
+
+# 6. EMI Eligibility by Company Type
+company_type_eligibility_counts = df.groupby(['company_type', 'emi_eligibility']).size().unstack(fill_value=0)
+company_type_eligibility_counts['Total_Applicants'] = company_type_eligibility_counts.sum(axis=1)
+company_type_eligibility_counts['Approval_Percentage'] = (company_type_eligibility_counts['Eligible'] / company_type_eligibility_counts['Total_Applicants']) * 100
+print("\nEMI Eligibility by Company Type:")
+print(company_type_eligibility_counts)
+print("\n")
+
+company_type_eligibility_counts[['Eligible', 'High_Risk', 'Not_Eligible']].plot(kind='bar', stacked=True, figsize=(10, 6), color=['green', 'orange', 'red'])
+plt.title('EMI Eligibility Distribution by Company Type')
+plt.xlabel('Company Type')
+plt.ylabel('Number of Applicants')
+plt.xticks(rotation=45)
+plt.legend(title='EMI Eligibility')
+plt.tight_layout()
+plt.show()
+
+# ==============================
+# Statistical Summaries for Categorical Columns
+# ==============================
+categorical_columns = ['gender', 'marital_status', 'education', 'employment_type', 
+                       'company_type', 'house_type', 'existing_loans', 
+                       'emi_scenario', 'emi_eligibility', 'age_group']
+
+for col in categorical_columns:
+    print(f"\n--- Column: {col} ---")
+    print("Value Counts:")
+    print(df[col].value_counts())
+    print("\nProportions:")
+    print(df[col].value_counts(normalize=True))
+    print("----------------------")
+
+# ==============================
+# Descriptive Statistics for Numerical Columns
+# ==============================
+numerical_columns = df.select_dtypes(include=['float64', 'int64']).columns
+descriptive_stats = df[numerical_columns].describe()
+print("\nDescriptive Statistics for Numerical Columns:\n")
+print(descriptive_stats)
