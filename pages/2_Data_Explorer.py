@@ -111,9 +111,14 @@ categorical_columns = ['gender', 'marital_status', 'education', 'employment_type
 for col in categorical_columns:
     st.markdown(f"**Column: {col}**")
     st.write("Value Counts:")
-    st.dataframe(df[col].value_counts().reset_index().rename(columns={'index': col, col: 'count'}))
+    counts_df = df[col].value_counts().reset_index()
+    counts_df.columns = [col, 'count']
+    st.dataframe(counts_df)
+    
     st.write("Proportions:")
-    st.dataframe(df[col].value_counts(normalize=True).reset_index().rename(columns={'index': col, col: 'proportion'}))
+    props_df = df[col].value_counts(normalize=True).reset_index()
+    props_df.columns = [col, 'proportion']
+    st.dataframe(props_df)
     st.markdown("---")
 
 # ==============================
