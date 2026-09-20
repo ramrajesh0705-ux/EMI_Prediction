@@ -2,6 +2,8 @@
 
 An interactive Streamlit application for assessing EMI affordability and loan eligibility with machine-learning models. Given a borrower’s demographic, employment, household, expense, credit, savings, and loan-request information, the application predicts an eligibility category and estimates the maximum safe monthly EMI.
 
+🚀 **[Live Demo →]https://guviemiprediction.streamlit.app/)**
+
 ## Project Overview & Purpose
 
 `EMI_Prediction` combines two supervised-learning tasks:
