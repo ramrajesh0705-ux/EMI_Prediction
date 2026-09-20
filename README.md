@@ -2,8 +2,6 @@
 
 An interactive Streamlit application for assessing EMI affordability and loan eligibility with machine-learning models. Given a borrower’s demographic, employment, household, expense, credit, savings, and loan-request information, the application predicts an eligibility category and estimates the maximum safe monthly EMI.
 
-> **Important:** This project is an analytical/demo decision-support tool. Its predictions should not be treated as a regulated lending decision or financial advice without appropriate validation, governance, fairness review, and human oversight.
-
 ## Project Overview & Purpose
 
 `EMI_Prediction` combines two supervised-learning tasks:
@@ -184,58 +182,6 @@ Streamlit will print a local URL, normally `http://localhost:8501`. Use the side
 - **Model Monitoring** to inspect prediction logs;
 - **Admin Panel** to manage logs.
 
-### Running the training notebooks
-
-The training workflow is notebook-based rather than a packaged command-line training pipeline. Launch Jupyter from the repository root:
-
-```bash
-jupyter notebook training/
-```
-
-Useful notebooks include:
-
-- `featureengineering.ipynb` — skew correction, transformations, categorical encoding, and derived features;
-- `XGBoostClassifier_model.ipynb` — eligibility classification;
-- `XGBoostRegressorModel_training.ipynb` — maximum-EMI regression and feature-column export;
-- `RandomForrestClassifier.ipynb` and `RandomForestRegressor_model_training.ipynb` — random-forest alternatives;
-- `LinearRegressionModel_training.ipynb` — linear regression baseline.
-
-Some notebooks reference intermediate files such as `feature_eng_df_final.csv` that are not part of the app’s runtime path. Reproduce or update those intermediate datasets before executing a notebook end to end.
-
-## Usage and Prediction Inputs
-
-The Prediction page accepts the following fields:
-
-```text
-age, gender, marital_status, education,
-monthly_salary, employment_type, years_of_employment, company_type,
-house_type, monthly_rent, family_size, dependents,
-school_fees, college_fees, travel_expenses, groceries_utilities,
-other_monthly_expenses, existing_loans, current_emi_amount,
-credit_score, bank_balance, emergency_fund, emi_scenario,
-requested_amount, requested_tenure
-```
-
-After selecting **Analyze EMI Eligibility**, the interface displays:
-
-- **EMI Eligibility:** `Eligible`, `High_Risk`, or `Not_Eligible`;
-- **Confidence:** the highest class probability returned by the classifier;
-- **Maximum Safe Monthly EMI (INR):** the inverse-transformed regression prediction.
-
-Every prediction is appended to `data/prediction_logs.csv` with the predicted class, maximum EMI, and timestamp.
-
-## API Endpoints
-
-This repository does **not** currently implement HTTP API endpoints. It is a Streamlit application, so the supported interface is the browser-based form in `pages/3_EMI_Prediction.py`.
-
-For programmatic integration, reuse the Python functions currently used by the UI:
-
-- `utils.preprocessing.preprocess_input(input_dict)` — converts a raw applicant dictionary to model-ready features;
-- `utils.model_loader.load_classification_model()` — loads the classifier;
-- `utils.model_loader.load_regression_model()` — loads the regressor.
-
-A production REST API would need to be added separately with request validation, authentication, model versioning, structured error responses, and a secure deployment configuration.
-
 ## Logs and Administration
 
 - Prediction logs are written to `data/prediction_logs.csv`.
@@ -251,15 +197,3 @@ The notebooks calculate metrics appropriate to each task:
 - **Classification:** accuracy, precision, recall, F1, confusion matrix, and ROC-AUC.
 
 For example, the checked-in regression experiments report metrics for their respective notebook models and data splits. These are research artifacts, not a guarantee of production performance. Re-evaluate on a representative holdout set, check class imbalance, calibrate probabilities, and validate for fairness and drift before using predictions in lending decisions.
-
-## Limitations and Operational Considerations
-
-- There is no automated training script, test suite, CI workflow, or REST API in the repository.
-- Model and encoder artifacts are tightly coupled to the feature schema and library versions used during training.
-- The inference preprocessing implementation should be reviewed before production use; persisted transformers should be applied with `transform`, not refit on individual inference rows.
-- Relative file paths require the application to be launched from the repository root.
-- Streamlit session state and CSV files are suitable for a prototype, not concurrent or regulated production workloads.
-
-## License
-
-No license file is currently included. Add a license before redistributing or accepting external contributions.
