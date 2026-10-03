@@ -1,0 +1,50 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 358 >>
+stream
+BT
+/F1 18 Tf
+50 750 Td
+(EMI Prediction Interview Preparation) Tj
+0 -28 Td
+/F1 12 Tf
+(Repository: ramrajesh0705-ux/EMI_Prediction) Tj
+0 -22 Td
+(Project: EMI eligibility classification and maximum EMI prediction.) Tj
+0 -22 Td
+(Models explored: Logistic Regression, Random Forest, XGBoost.) Tj
+0 -22 Td
+(Workflow: data cleaning, feature engineering, MLflow tracking, Streamlit UI.) Tj
+0 -22 Td
+(Repository includes training notebooks, preprocessing code, and model monitoring.) Tj
+0 -22 Td
+(Prepared for interview practice and project discussion.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000062 00000 n 
+0000000123 00000 n 
+0000000245 00000 n 
+0000000832 00000 n 
+0000000918 00000 n 
+trailer
+<< /Root 1 0 R /Size 6 >>
+startxref
+975
+%%EOF
